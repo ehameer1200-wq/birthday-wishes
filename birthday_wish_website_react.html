@@ -1,0 +1,120 @@
+export default function BirthdayWishWebsite() {
+  const [step, setStep] = useState(0);
+  useEffect(() => {
+    const duration = 5 * 1000;
+    const end = Date.now() + duration;
+
+    const colors = ["#ff4d6d", "#ffd166", "#8338ec", "#3a86ff"];
+
+    const frame = () => {
+      confetti({
+        particleCount: 3,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+        colors,
+      });
+
+      confetti({
+        particleCount: 3,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+        colors,
+      });
+
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    };
+
+    frame();
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-[#0f0f12] text-white overflow-hidden relative px-4 py-10 flex items-center justify-center">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_40%)]"></div>
+
+      <div className="w-full max-w-5xl bg-white/5 border border-white/10 backdrop-blur-2xl rounded-[32px] shadow-2xl overflow-hidden relative z-10">
+        <div className="grid md:grid-cols-2 gap-0">
+          <div className="p-8 md:p-12 flex flex-col justify-center">
+            <p className="uppercase tracking-[0.35em] text-sm text-pink-300 mb-4">
+              For My Favorite Person
+            </p>
+
+            <h1 className="text-5xl md:text-7xl font-light leading-tight mb-6">
+              Happy <span className="italic text-pink-300">Birthday</span>
+            </h1>
+
+            <p className="text-gray-300 leading-8 text-base md:text-lg mb-8">
+               You literally crashed into my life unexpectedly,
+               You are something that i never planned 
+               but now you have somehow become a major part of my life,
+               You make it more colorful and eventful.
+               May you have a beautiful year forward
+               May your days be filled with love 
+              Every moment with you feels softer, warmer, and unforgettable. Today is about celebrating
+              you — your smile, your heart, your existence, and every little thing that makes you special.
+            </p>
+
+            {step >= 4 && (
+              <div className="bg-white/5 border border-white/10 rounded-3xl p-6 animate-in fade-in duration-1000">
+                <p className="text-sm uppercase tracking-[0.2em] text-pink-200 mb-3">
+                  Personal Note
+                </p>
+
+                <textarea
+                  placeholder=Happy Birthday Vavee❤️💋
+                  className="w-full bg-transparent text-gray-200 placeholder:text-gray-500 h-40 resize-none outline-none text-base leading-7"
+                />
+              </div>
+            )}
+          </div>
+
+          {step >= 1 && (
+            <div className="relative min-h-[500px] bg-black/20 p-5 grid grid-cols-2 gap-4 animate-in fade-in duration-1000">
+              <img
+                src=C:\Users\User\Desktop\New folder (3)\public
+                alt="memory 1"
+                className="rounded-3xl object-cover h-full w-full col-span-2 max-h-[250px]"
+              />
+
+              {step >= 2 && (
+                <img
+                  src=C:\Users\User\Desktop\New folder (3)\public
+                  alt="memory 2"
+                  className="rounded-3xl object-cover h-full w-full animate-in fade-in duration-1000"
+                />
+              )}
+
+              {step >= 3 && (
+                <img
+                  src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1200&auto=format&fit=crop"
+                  alt="memory 3"
+                  className="rounded-3xl object-cover h-full w-full animate-in fade-in duration-1000"
+                />
+              )}
+            </div>
+          )}
+        </div>
+
+        <div className="border-t border-white/10 px-8 md:px-12 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-gray-400 text-sm tracking-wide">
+            Crafted with love, patience & late-night thoughts ✨
+          </p>
+
+          <button
+              onClick={() => {
+                if (step < 4) {
+                  setStep(step + 1);
+                }
+              }}
+              className="px-8 py-3 rounded-full bg-white text-black hover:scale-105 transition-all duration-300 font-medium shadow-xl"
+            >
+              Reveal Another Memory ♡
+            </button>
+        </div>
+      </div>
+    </div>
+  );
+}
